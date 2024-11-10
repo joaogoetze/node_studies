@@ -1,21 +1,12 @@
-const http = require('http');
-const fetch = require('node-fetch');
+import express from 'express';
 
-const server = http.createServer((req, res) =>{
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World!\n');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+    res.send('Hello World');
 });
 
-server.listen(3000, () => {
-    console.log('Servidor rodando em http://localhost:3000/');
+app.listen(port, () =>{
+    console.log(`Server running on ${port} port`);
 });
-
-fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error(`Erro: ${error}`);
-    });
